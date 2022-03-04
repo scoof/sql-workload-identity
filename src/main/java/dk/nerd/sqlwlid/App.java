@@ -18,6 +18,7 @@ public class App {
     final TokenRequestContext tokenRequestContext = new TokenRequestContext();
     tokenRequestContext.setScopes(Arrays.asList(AZURE_SQL_SCOPES));
     final Properties props = new Properties();
+    // This just proves that you CAN connect using a token. Rollover is not handled, so this is unsuitable for production!
     props.setProperty("accessToken", new CustomTokenCredential().getToken(tokenRequestContext).block().getToken());
 
     try (Connection con = DriverManager.getConnection(connectionUrl, props); Statement stmt = con.createStatement();) {
